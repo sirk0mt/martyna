@@ -63,11 +63,17 @@ void handle_whole_packet() {
   received_time = parse_float(time_offset); // przeliczenie czasu od włączenia czujnika z tablicy odebranego pakietu od zadanego offsetu
 }
 
+/**
+ * \brief     Domyślna funkcja arduino wykonywana na początku uruchamiania urządzenia
+*/
 void setup() {
   Serial.begin(9600);                     // inicjalizacja portu do komunikacji z PC
   Serial1.begin(9600);                    // inicjalizacja portu do komunikacji z czujnikiem temp
 }
 
+/**
+ * \brief     Główna pętla programu (ta funkcja wykonuje się w nieskończoność)
+*/
 void loop() {
   if (Serial1.available()) {              // jeśli dostępny jest bajt na porcie szeregowym
     incoming_byte = Serial.read();        // przypisanie odebranego bajtu do zmiennej
@@ -93,4 +99,5 @@ void loop() {
       }
     }
   }
+  delay(80);                                                            // nwm czemu akurat 80ms, ale tak było w kodzie
 }
